@@ -1,6 +1,7 @@
 package com.example.xosomienbac.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.xosomienbac.R;
 import com.example.xosomienbac.adapter.XSMBAdapter;
+import com.example.xosomienbac.crawler.OnCrawlResultListener;
+import com.example.xosomienbac.crawler.XSMBCrawler;
 import com.example.xosomienbac.model.PrizeRow;
 
 import java.util.ArrayList;
@@ -46,15 +49,47 @@ public class XSMBFragment extends Fragment {
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext()));
 
-        List<PrizeRow> data = new ArrayList<>();
+//        List<PrizeRow> data = new ArrayList<>();
+//
+//        data.add(new PrizeRow("ĐB","47202"));
+//        data.add(new PrizeRow("G1","65673"));
+//        data.add(new PrizeRow("G2","20007 - 93437"));
+//        data.add(new PrizeRow("G3","15277 - 19055"));
+//        data.add(new PrizeRow("G4","2797 - 2795"));
+//
+//        recyclerView.setAdapter(
+//                new XSMBAdapter(data));
+        loadData();
+    }
+    private void loadData() {
 
-        data.add(new PrizeRow("ĐB","47202"));
-        data.add(new PrizeRow("G1","65673"));
-        data.add(new PrizeRow("G2","20007 - 93437"));
-        data.add(new PrizeRow("G3","15277 - 19055"));
-        data.add(new PrizeRow("G4","2797 - 2795"));
+        XSMBCrawler.crawl(
+                new OnCrawlResultListener() {
 
-        recyclerView.setAdapter(
-                new XSMBAdapter(data));
+                    @Override
+                    public void onSuccess(
+                            List<PrizeRow> data) {
+
+                        requireActivity()
+                                .runOnUiThread(() -> {
+
+                                    recyclerView.setAdapter(
+                                            new XSMBAdapter(data)
+                                    );
+
+                                });
+                    }
+
+                    @Override
+                    public void onError(
+                            Exception e) {
+
+                        Log.e(
+                                "XSMB",
+                                "Crawl error",
+                                e
+                        );
+                    }
+                });
     }
 }

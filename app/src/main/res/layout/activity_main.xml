@@ -6,10 +6,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/tabLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:tabMode="fixed"-->
+<!--        app:tabGravity="fill"-->
+<!--        android:visibility="gone"/>-->
+<!--    <TextView-->
+<!--        android:id="@+id/txtTitle"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center"-->
+<!--        android:padding="16dp"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"/>-->
+    <com.example.xosomienbac.StrokeTextView
+        android:id="@+id/txtTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Trang Chủ"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"

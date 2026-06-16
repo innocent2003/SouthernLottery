@@ -1,6 +1,8 @@
 package com.example.xosomienbac;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
@@ -9,10 +11,17 @@ import com.example.xosomienbac.adapter.LotteryPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 public class MainActivity extends AppCompatActivity implements OnRegionClickListener {
+    private static final String TAG = "JSOUP_TEST";
 
     ViewPager2 viewPager;
-    TabLayout tabLayout;
+    TextView txtTitle;
+//    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,34 +29,40 @@ public class MainActivity extends AppCompatActivity implements OnRegionClickList
         setContentView(R.layout.activity_main);
 
         viewPager = findViewById(R.id.viewPager);
-        tabLayout = findViewById(R.id.tabLayout);
+        txtTitle = findViewById(R.id.txtTitle);
+//        tabLayout = findViewById(R.id.tabLayout);
 
         LotteryPagerAdapter adapter =
                 new LotteryPagerAdapter(this);
 
         viewPager.setAdapter(adapter);
 
-        new TabLayoutMediator(
-                tabLayout,
-                viewPager,
-                (tab, position) -> {
 
-                    switch (position){
-                        case 0:
-                            tab.setText("Trang chủ");
-                            break;
-                        case 1:
-                            tab.setText("Miền Bắc");
-                            break;
-                        case 2:
-                            tab.setText("Miền Trung");
-                            break;
-                        case 3:
-                            tab.setText("Miền Nam");
-                            break;
+        txtTitle.setText("Trang chủ");
+
+        viewPager.registerOnPageChangeCallback(
+                new ViewPager2.OnPageChangeCallback() {
+                    @Override
+                    public void onPageSelected(int position) {
+                        switch (position) {
+                            case 0:
+                                txtTitle.setText("Trang chủ");
+                                break;
+                            case 1:
+                                txtTitle.setText("Miền Bắc");
+                                break;
+                            case 2:
+                                txtTitle.setText("Miền Trung");
+                                break;
+                            case 3:
+                                txtTitle.setText("Miền Nam");
+                                break;
+                        }
                     }
-                }).attach();
+                });
+        crawlData();
     }
+
 
     @Override
     public void openMienBac() {
@@ -62,5 +77,78 @@ public class MainActivity extends AppCompatActivity implements OnRegionClickList
     @Override
     public void openMienNam() {
         viewPager.setCurrentItem(3, true);
+    }
+
+    private void crawlData() {
+
+        new Thread(() -> {
+
+            try {
+
+                String url = "https://az24.vn/xsmb-sxmb-xo-so-mien-bac.html";
+
+                Document doc = Jsoup.connect(url)
+                        .userAgent("Mozilla/5.0")
+                        .timeout(10000)
+                        .get();
+
+//                Log.d(TAG, "Title = " + doc.title());
+
+                Element table = doc.selectFirst(
+                        "table.kqmb.colgiai.extendable"
+                );
+
+                if (table == null) {
+
+                    Log.e(TAG, "Khong tim thay bang");
+                    return;
+                }
+
+                Elements rows = table.select("tr");
+
+                for (Element row : rows) {
+
+                    Element txtGiai =
+                            row.selectFirst("td.txt-giai");
+
+                    Element vGiai =
+                            row.selectFirst("td.v-giai");
+
+                    if (txtGiai == null || vGiai == null) {
+                        continue;
+                    }
+
+                    String tenGiai = txtGiai.text();
+
+                    Elements spans =
+                            vGiai.select("span");
+
+                    StringBuilder ketQua =
+                            new StringBuilder();
+
+                    for (Element span : spans) {
+
+                        ketQua.append(span.text())
+                                .append(" ");
+                    }
+
+                    Log.d(
+                            TAG,
+                            "Giai = "
+                                    + tenGiai
+                                    + " | KetQua = "
+                                    + ketQua.toString().trim()
+                    );
+                }
+
+            } catch (Exception e) {
+
+                Log.e(TAG,
+                        "Loi crawl: "
+                                + e.getMessage(),
+                        e);
+            }
+
+        }).start();
     }
 }

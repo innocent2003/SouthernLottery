@@ -15,23 +15,49 @@
         android:gravity="center"
         android:orientation="vertical">
 
+<!--        <TextView-->
+<!--            android:id="@+id/txtTitle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="16sp"/>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/txtResult"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="18sp"-->
+<!--            android:layout_marginTop="8dp"/>-->
+
         <TextView
             android:id="@+id/txtTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:textSize="16sp"/>
+
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeMaxTextSize="16sp"
+            android:autoSizeStepGranularity="1sp"/>
 
         <TextView
             android:id="@+id/txtResult"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="8dp"/>
 
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeMaxTextSize="18sp"
+            android:autoSizeStepGranularity="1sp"/>
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
