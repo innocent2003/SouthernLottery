@@ -2,6 +2,8 @@ package com.example.xosomienbac;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements OnRegionClickList
     private static final String TAG = "JSOUP_TEST";
 
     ViewPager2 viewPager;
+    ImageView btnBack;
     TextView txtTitle;
 //    TabLayout tabLayout;
 
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements OnRegionClickList
         txtTitle = findViewById(R.id.txtTitle);
 //        tabLayout = findViewById(R.id.tabLayout);
 
+        btnBack = findViewById(R.id.btnBack);
         LotteryPagerAdapter adapter =
                 new LotteryPagerAdapter(this);
 
@@ -39,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements OnRegionClickList
 
 
         txtTitle.setText("Trang chủ");
+        btnBack.setOnClickListener(v -> {
+            viewPager.setCurrentItem(0, true);
+        });
 
         viewPager.registerOnPageChangeCallback(
                 new ViewPager2.OnPageChangeCallback() {
@@ -46,15 +53,19 @@ public class MainActivity extends AppCompatActivity implements OnRegionClickList
                     public void onPageSelected(int position) {
                         switch (position) {
                             case 0:
+                                btnBack.setVisibility(View.INVISIBLE);
                                 txtTitle.setText("Trang chủ");
                                 break;
                             case 1:
+                                btnBack.setVisibility(View.VISIBLE);
                                 txtTitle.setText("Miền Bắc");
                                 break;
                             case 2:
+                                btnBack.setVisibility(View.VISIBLE);
                                 txtTitle.setText("Miền Trung");
                                 break;
                             case 3:
+                                btnBack.setVisibility(View.VISIBLE);
                                 txtTitle.setText("Miền Nam");
                                 break;
                         }

@@ -6,32 +6,54 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<!--    <com.google.android.material.tabs.TabLayout-->
-<!--        android:id="@+id/tabLayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:tabMode="fixed"-->
-<!--        app:tabGravity="fill"-->
+
+
+<!--    <ImageView-->
+<!--        android:id="@+id/btnBack"-->
+<!--        android:layout_width="24dp"-->
+<!--        android:layout_height="24dp"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:src="@drawable/keyboard_backspace_24px"-->
 <!--        android:visibility="gone"/>-->
-<!--    <TextView-->
+<!--    <com.example.xosomienbac.StrokeTextView-->
 <!--        android:id="@+id/txtTitle"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
+<!--        android:background="#EE3654"-->
 <!--        android:gravity="center"-->
-<!--        android:padding="16dp"-->
-<!--        android:textSize="20sp"-->
+<!--        android:paddingVertical="12dp"-->
+<!--        android:text="Xổ Số Miền Bắc"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textSize="22sp"-->
 <!--        android:textStyle="bold"/>-->
-    <com.example.xosomienbac.StrokeTextView
-        android:id="@+id/txtTitle"
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Trang Chủ"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"/>
+        android:background="#EE3654">
+
+        <com.example.xosomienbac.StrokeTextView
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="12dp"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/keyboard_backspace_24px"
+
+            app:tint="#FFFFFF" />
+
+    </FrameLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
