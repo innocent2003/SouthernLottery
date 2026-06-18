@@ -47,11 +47,11 @@ public class XSMNFragment extends Fragment {
 
         List<PrizeRow> data = new ArrayList<>();
 
-        data.add(new PrizeRow("G8",
-                "60 | 78 | 19"));
-
-        data.add(new PrizeRow("G7",
-                "620 | 088 | 860"));
+//        data.add(new PrizeRow("G8",
+//                "60 | 78 | 19"));
+//
+//        data.add(new PrizeRow("G7",
+//                "620 | 088 | 860"));
 
         recyclerView.setAdapter(
                 new XSMBAdapter(data));

@@ -46,14 +46,14 @@ public class XSMTFragment extends Fragment {
 
         List<PrizeRow> data = new ArrayList<>();
 
-        data.add(new PrizeRow("G8",
-                "39 | 70 | 33"));
-
-        data.add(new PrizeRow("G7",
-                "444 | 807 | 903"));
-
-        data.add(new PrizeRow("G6",
-                "5027 | 8890 | 9413"));
+//        data.add(new PrizeRow("G8",
+//                "39 | 70 | 33"));
+//
+//        data.add(new PrizeRow("G7",
+//                "444 | 807 | 903"));
+//
+//        data.add(new PrizeRow("G6",
+//                "5027 | 8890 | 9413"));
 
         recyclerView.setAdapter(
                 new XSMBAdapter(data));

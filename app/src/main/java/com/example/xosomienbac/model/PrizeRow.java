@@ -1,19 +1,24 @@
 package com.example.xosomienbac.model;
 
+import java.util.List;
+
 public class PrizeRow {
     String prize;
-    String value;
+    List<String> values;
 
-    public PrizeRow(String prize, String value) {
+    public PrizeRow(
+            String prize,
+            List<String> values) {
+
         this.prize = prize;
-        this.value = value;
+        this.values = values;
     }
 
     public String getPrize() {
         return prize;
     }
 
-    public String getValue() {
-        return value;
+    public List<String> getValues() {
+        return values;
     }
 }

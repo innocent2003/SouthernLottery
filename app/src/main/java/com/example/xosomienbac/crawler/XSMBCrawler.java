@@ -7,8 +7,40 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 public class XSMBCrawler {
+    private String getTodayThu() {
+
+        Calendar calendar = Calendar.getInstance();
+
+        int dayOfWeek =
+                calendar.get(Calendar.DAY_OF_WEEK);
+
+        switch (dayOfWeek) {
+
+            case Calendar.MONDAY:
+                return "2";
+
+            case Calendar.TUESDAY:
+                return "3";
+
+            case Calendar.WEDNESDAY:
+                return "4";
+
+            case Calendar.THURSDAY:
+                return "5";
+
+            case Calendar.FRIDAY:
+                return "6";
+
+            case Calendar.SATURDAY:
+                return "7";
+
+            default:
+                return "chu-nhat";
+        }
+    }
     public static void crawl(OnCrawlResultListener listener) {
 
         new Thread(() -> {
@@ -52,24 +84,18 @@ public class XSMBCrawler {
                         String tenGiai =
                                 txtGiai.text();
 
-                        Elements spans =
-                                vGiai.select("span");
+                        Elements spans = vGiai.select("span");
 
-                        StringBuilder ketQua =
-                                new StringBuilder();
+                        List<String> values = new ArrayList<>();
 
                         for (Element span : spans) {
-
-                            ketQua.append(
-                                            span.text())
-                                    .append(" ");
+                            values.add(span.text());
                         }
 
                         list.add(
                                 new PrizeRow(
                                         tenGiai,
-                                        ketQua.toString()
-                                                .trim()
+                                        values
                                 )
                         );
                     }

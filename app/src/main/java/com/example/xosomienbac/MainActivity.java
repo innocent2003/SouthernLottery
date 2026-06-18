@@ -18,12 +18,18 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity implements OnRegionClickListener {
     private static final String TAG = "JSOUP_TEST";
 
     ViewPager2 viewPager;
     ImageView btnBack;
     TextView txtTitle;
+    String thu = getTodayThu();
 //    TabLayout tabLayout;
 
     @Override
@@ -55,23 +61,36 @@ public class MainActivity extends AppCompatActivity implements OnRegionClickList
                             case 0:
                                 btnBack.setVisibility(View.INVISIBLE);
                                 txtTitle.setText("Trang chủ");
+                                viewPager.setUserInputEnabled(false);
                                 break;
                             case 1:
                                 btnBack.setVisibility(View.VISIBLE);
                                 txtTitle.setText("Miền Bắc");
+                                viewPager.setUserInputEnabled(true);
                                 break;
                             case 2:
                                 btnBack.setVisibility(View.VISIBLE);
                                 txtTitle.setText("Miền Trung");
+                                viewPager.setUserInputEnabled(true);
                                 break;
                             case 3:
                                 btnBack.setVisibility(View.VISIBLE);
                                 txtTitle.setText("Miền Nam");
+                                viewPager.setUserInputEnabled(true);
                                 break;
                         }
                     }
                 });
-        crawlData();
+        crawlData(thu);
+        SimpleDateFormat sdf =
+                new SimpleDateFormat(
+                        "EEEE, dd/MM/yyyy",
+                        new Locale("vi", "VN"));
+
+        String today = sdf.format(new Date());
+
+        Log.d("DATE_TEST", today);
+
     }
 
 
@@ -90,13 +109,44 @@ public class MainActivity extends AppCompatActivity implements OnRegionClickList
         viewPager.setCurrentItem(3, true);
     }
 
-    private void crawlData() {
+    private String getTodayThu() {
+
+        Calendar calendar = Calendar.getInstance();
+
+        int dayOfWeek =
+                calendar.get(Calendar.DAY_OF_WEEK);
+
+        switch (dayOfWeek) {
+
+            case Calendar.MONDAY:
+                return "2";
+
+            case Calendar.TUESDAY:
+                return "3";
+
+            case Calendar.WEDNESDAY:
+                return "4";
+
+            case Calendar.THURSDAY:
+                return "5";
+
+            case Calendar.FRIDAY:
+                return "6";
+
+            case Calendar.SATURDAY:
+                return "7";
+
+            default:
+                return "chu-nhat";
+        }
+    }
+    private void crawlData(String thu) {
 
         new Thread(() -> {
 
             try {
 
-                String url = "https://az24.vn/xsmb-sxmb-xo-so-mien-bac.html";
+                String url = "https://az24.vn/xsmb-"+thu+".html";
 
                 Document doc = Jsoup.connect(url)
                         .userAgent("Mozilla/5.0")
