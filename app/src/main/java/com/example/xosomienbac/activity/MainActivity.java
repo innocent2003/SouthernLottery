@@ -1,4 +1,4 @@
-package com.example.xosomienbac;
+package com.example.xosomienbac.activity;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,9 +9,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.xosomienbac.R;
 import com.example.xosomienbac.adapter.LotteryPagerAdapter;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -99,15 +98,15 @@ public class MainActivity extends AppCompatActivity implements OnRegionClickList
         viewPager.setCurrentItem(1, true);
     }
 
-    @Override
-    public void openMienTrung() {
-        viewPager.setCurrentItem(2, true);
-    }
-
-    @Override
-    public void openMienNam() {
-        viewPager.setCurrentItem(3, true);
-    }
+//    @Override
+//    public void openMienTrung() {
+//        viewPager.setCurrentItem(2, true);
+//    }
+//
+//    @Override
+//    public void openMienNam() {
+//        viewPager.setCurrentItem(3, true);
+//    }
 
     private String getTodayThu() {
 

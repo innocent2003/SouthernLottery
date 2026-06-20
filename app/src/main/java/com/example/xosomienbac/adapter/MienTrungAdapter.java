@@ -15,18 +15,17 @@ import com.example.xosomienbac.model.PrizeRow;
 
 import java.util.List;
 
-public class XSMBAdapter
-        extends RecyclerView.Adapter<XSMBAdapter.Holder>{
+public class MienTrungAdapter extends RecyclerView.Adapter<MienTrungAdapter.Holder>{
 
     List<PrizeRow> list;
 
-    public XSMBAdapter(List<PrizeRow> list) {
+    public MienTrungAdapter(List<PrizeRow> list) {
         this.list = list;
     }
 
     @NonNull
     @Override
-    public Holder onCreateViewHolder(
+    public MienTrungAdapter.Holder onCreateViewHolder(
             @NonNull ViewGroup parent,
             int viewType) {
 
@@ -37,12 +36,12 @@ public class XSMBAdapter
                         parent,
                         false);
 
-        return new Holder(view);
+        return new MienTrungAdapter.Holder(view);
     }
 
     @Override
     public void onBindViewHolder(
-            @NonNull Holder holder,
+            @NonNull MienTrungAdapter.Holder holder,
             int position) {
 
         PrizeRow row = list.get(position);
@@ -116,9 +115,11 @@ public class XSMBAdapter
             txtPrize =
                     itemView.findViewById(R.id.txtPrize);
 
-
+//            txtValue =
+//                    itemView.findViewById(R.id.txtValue);
             gridValues =
                     itemView.findViewById(R.id.gridValues);
         }
     }
+
 }

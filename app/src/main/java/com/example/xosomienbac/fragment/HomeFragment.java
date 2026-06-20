@@ -1,26 +1,24 @@
 package com.example.xosomienbac.fragment;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.xosomienbac.OnRegionClickListener;
+import com.example.xosomienbac.activity.MienNamActivity;
+import com.example.xosomienbac.activity.MienTrungActivity;
+import com.example.xosomienbac.activity.OnRegionClickListener;
 import com.example.xosomienbac.R;
 import com.example.xosomienbac.adapter.HomeAdapter;
-import com.example.xosomienbac.adapter.XSMBAdapter;
 import com.example.xosomienbac.model.HomeItem;
-import com.example.xosomienbac.model.PrizeRow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -142,10 +140,23 @@ public class HomeFragment extends Fragment {
         mienBac.setOnClickListener(v ->
                 listener.openMienBac());
 
-        mienTrung.setOnClickListener(v ->
-                listener.openMienTrung());
+//        mienTrung.setOnClickListener(v ->
+//                listener.openMienTrung());
+//
+//        mienNam.setOnClickListener(v ->
+//                listener.openMienNam());
+        mienTrung.setOnClickListener(v -> {
+            Intent intent =
+                    new Intent(getActivity(),
+                            MienTrungActivity.class);
+            startActivity(intent);
+        });
 
-        mienNam.setOnClickListener(v ->
-                listener.openMienNam());
+        mienNam.setOnClickListener(v -> {
+            Intent intent =
+                    new Intent(getActivity(),
+                            MienNamActivity.class);
+            startActivity(intent);
+        });
     }
 }
