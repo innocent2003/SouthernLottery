@@ -18,15 +18,11 @@
         android:textSize="16sp"
         android:textStyle="bold"/>
 
-<!--    <TextView-->
-<!--        android:id="@+id/txtValue"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_weight="1"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:gravity="center"/>-->
+
     <GridLayout
         android:id="@+id/gridValues"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_grid_border"
         android:layout_weight="1"/>
 </LinearLayout>

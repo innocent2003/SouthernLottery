@@ -69,12 +69,12 @@ public class MainActivity extends AppCompatActivity implements OnRegionClickList
                                 break;
                             case 2:
                                 btnBack.setVisibility(View.VISIBLE);
-                                txtTitle.setText("Miền Trung");
+                                txtTitle.setText("Miền Bắc");
                                 viewPager.setUserInputEnabled(true);
                                 break;
                             case 3:
                                 btnBack.setVisibility(View.VISIBLE);
-                                txtTitle.setText("Miền Nam");
+                                txtTitle.setText("Miền Bắc");
                                 viewPager.setUserInputEnabled(true);
                                 break;
                         }
