@@ -63,7 +63,11 @@ public class XSMBFragment extends Fragment {
     }
     private void loadData() {
 
+        String url =
+                "https://az24.vn/xsmb-sxmb-xo-so-mien-bac.html";
+
         XSMBCrawler.crawl(
+                url,
                 new OnCrawlResultListener() {
 
                     @Override
@@ -76,19 +80,12 @@ public class XSMBFragment extends Fragment {
                                     recyclerView.setAdapter(
                                             new XSMBAdapter(data)
                                     );
-
                                 });
                     }
 
                     @Override
-                    public void onError(
-                            Exception e) {
-
-                        Log.e(
-                                "XSMB",
-                                "Crawl error",
-                                e
-                        );
+                    public void onError(Exception e) {
+                        Log.e("XSMB", "Error", e);
                     }
                 });
     }

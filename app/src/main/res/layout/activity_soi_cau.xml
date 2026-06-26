@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Tiêu đề ngày -->
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Kết quả XSMN ngày 2026-06-24"
+            android:textColor="#E53958"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TableLayout
+            android:id="@+id/tableResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
+
+            <!-- Header -->
+            <TableRow>
+
+                <TextView
+                    style="@style/HeaderCell"
+                    android:text="T" />
+
+                <TextView
+                    style="@style/HeaderCell"
+                    android:text="Đồng\nNai" />
+
+                <TextView
+                    style="@style/HeaderCell"
+                    android:text="Cần\nThơ" />
+
+                <TextView
+                    style="@style/HeaderCell"
+                    android:text="Sóc\nTrăng" />
+
+            </TableRow>
+
+            <!-- G8 -->
+            <TableRow>
+
+                <TextView
+                    style="@style/PrizeCell"
+                    android:text="G8" />
+
+                <TextView
+                    style="@style/ResultCell"
+                    android:text="61" />
+
+                <TextView
+                    style="@style/ResultCell"
+                    android:text="57" />
+
+                <TextView
+                    style="@style/ResultCell"
+                    android:text="20" />
+
+            </TableRow>
+
+            <!-- G7 -->
+            <TableRow>
+
+                <TextView
+                    style="@style/PrizeCell"
+                    android:text="G7" />
+
+                <TextView
+                    style="@style/ResultCell"
+                    android:text="383" />
+
+                <TextView
+                    style="@style/ResultCell"
+                    android:text="818" />
+
+                <TextView
+                    style="@style/ResultCell"
+                    android:text="599" />
+
+            </TableRow>
+
+            <!-- G6 -->
+            <TableRow>
+
+                <TextView
+                    style="@style/PrizeCell"
+                    android:text="G6" />
+
+                <TextView
+                    style="@style/ResultMultiCell"
+                    android:text="2184&#10;5510&#10;6000" />
+
+                <TextView
+                    style="@style/ResultMultiCell"
+                    android:text="6222&#10;6083&#10;5766" />
+
+                <TextView
+                    style="@style/ResultMultiCell"
+                    android:text="4123&#10;6180&#10;7593" />
+
+            </TableRow>
+
+            <!-- G5 -->
+            <TableRow>
+
+                <TextView
+                    style="@style/PrizeCell"
+                    android:text="G5" />
+
+                <TextView
+                    style="@style/ResultCell"
+                    android:text="2617" />
+
+                <TextView
+                    style="@style/ResultCell"
+                    android:text="8203" />
+
+                <TextView
+                    style="@style/ResultCell"
+                    android:text="4537" />
+
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+
+
+
+
+

@@ -80,7 +80,9 @@ public class MainActivity extends AppCompatActivity implements OnRegionClickList
                         }
                     }
                 });
-        crawlData(thu);
+//        crawlData(thu);
+//        crawlTest("https://az24.vn/xsmn-sxmn-xo-so-mien-nam.html");
+        crawlTest("https://az24.vn/xsmn-thu-7.html");
         SimpleDateFormat sdf =
                 new SimpleDateFormat(
                         "EEEE, dd/MM/yyyy",
@@ -211,4 +213,108 @@ public class MainActivity extends AppCompatActivity implements OnRegionClickList
 
         }).start();
     }
+    private void crawlTest(String url) {
+
+        new Thread(() -> {
+
+            try {
+
+                Document doc = Jsoup.connect(url)
+                        .userAgent("Mozilla/5.0")
+                        .timeout(15000)
+                        .get();
+
+                Element table = doc.selectFirst(
+                        "table.colfourcity.colgiai.extendable, " +
+                                "table.colthreecity.colgiai.extendable");
+
+                if (table == null) {
+
+                    Log.e("XSMN",
+                            "Table not found");
+
+                    return;
+                }
+
+                for (Element row : table.select("tr")) {
+
+                    Log.d("ROW_CLASS",
+                            row.className());
+
+                    // Header chứa tên tỉnh
+                    if (row.select("th").size() > 0) {
+
+                        for (Element th : row.select("th")) {
+
+                            Log.d("PROVINCE",
+                                    th.text());
+                        }
+
+                        continue;
+                    }
+
+                    Elements tds =
+                            row.select("> td");
+
+                    if (tds.isEmpty()) {
+                        continue;
+                    }
+
+                    String prize =
+                            tds.get(0).text();
+
+                    Log.d("PRIZE",
+                            prize);
+
+                    for (int i = 1;
+                         i < tds.size();
+                         i++) {
+
+                        Element td =
+                                tds.get(i);
+
+                        Elements divs =
+                                td.select("div");
+
+                        if (!divs.isEmpty()) {
+
+                            StringBuilder sb =
+                                    new StringBuilder();
+
+                            for (Element div : divs) {
+
+                                sb.append(div.text())
+                                        .append(" ");
+                            }
+
+                            Log.d(
+                                    "RESULT",
+                                    "Cot " + i
+                                            + " = "
+                                            + sb.toString()
+                            );
+
+                        } else {
+
+                            Log.d(
+                                    "RESULT",
+                                    "Cot " + i
+                                            + " = "
+                                            + td.text()
+                            );
+                        }
+                    }
+                }
+
+            } catch (Exception e) {
+
+                Log.e("XSMN",
+                        "Error",
+                        e);
+            }
+
+        }).start();
+    }
+
+
 }

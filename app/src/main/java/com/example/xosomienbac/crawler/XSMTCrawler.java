@@ -1,8 +1,6 @@
 package com.example.xosomienbac.crawler;
-import android.util.Log;
 
 import com.example.xosomienbac.model.PrizeRow;
-import com.example.xosomienbac.model.RowData;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,7 +10,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-public class XSMBCrawler {
+
+public class XSMTCrawler {
     private String getTodayThu() {
 
         Calendar calendar = Calendar.getInstance();
@@ -44,13 +43,14 @@ public class XSMBCrawler {
                 return "chu-nhat";
         }
     }
-    public static void crawl(
-            String url,
-            OnCrawlResultListener listener) {
+    public static void crawl(OnCrawlResultListener listener) {
 
         new Thread(() -> {
 
             try {
+
+                String url =
+                        "https://az24.vn/xsmt-sxmt-xo-so-mien-trung.html";
 
                 Document doc = Jsoup.connect(url)
                         .userAgent("Mozilla/5.0")
@@ -71,10 +71,12 @@ public class XSMBCrawler {
                     for (Element row : rows) {
 
                         Element txtGiai =
-                                row.selectFirst("td.txt-giai");
+                                row.selectFirst(
+                                        "td.txt-giai");
 
                         Element vGiai =
-                                row.selectFirst("td.v-giai");
+                                row.selectFirst(
+                                        "td.v-giai");
 
                         if (txtGiai == null ||
                                 vGiai == null) {
@@ -84,12 +86,11 @@ public class XSMBCrawler {
                         String tenGiai =
                                 txtGiai.text();
 
-                        List<String> values =
-                                new ArrayList<>();
+                        Elements spans = vGiai.select("span");
 
-                        for (Element span :
-                                vGiai.select("span")) {
+                        List<String> values = new ArrayList<>();
 
+                        for (Element span : spans) {
                             values.add(span.text());
                         }
 
@@ -101,75 +102,6 @@ public class XSMBCrawler {
                         );
                     }
                 }
-
-                listener.onSuccess(list);
-
-            } catch (Exception e) {
-
-                listener.onError(e);
-            }
-
-        }).start();
-    }
-    public static void crawlMultiProvince(
-            String url,
-            OnMultiCrawlResultListener listener) {
-
-        new Thread(() -> {
-
-            try {
-
-                Document doc = Jsoup.connect(url)
-                        .userAgent("Mozilla/5.0")
-                        .timeout(10000)
-                        .get();
-
-                Log.d("URL_REAL",
-                        doc.location());
-
-                Element table =
-                        doc.selectFirst(
-                                "table.colgiai.extendable");
-
-                if (table == null) {
-
-                    listener.onError(
-                            new Exception(
-                                    "Table not found"));
-
-                    return;
-                }
-
-                List<RowData> list =
-                        new ArrayList<>();
-
-                Elements rows =
-                        table.select("tr");
-
-                for (Element row : rows) {
-
-                    List<String> cells =
-                            new ArrayList<>();
-
-                    for (Element cell :
-                            row.select("th,td")) {
-
-                        cells.add(
-                                cell.text().trim());
-                    }
-
-                    if (!cells.isEmpty()) {
-
-                        list.add(
-                                new RowData(
-                                        row.className(),
-                                        cells));
-                    }
-                }
-
-                Log.d("ROWS",
-                        String.valueOf(
-                                list.size()));
 
                 listener.onSuccess(list);
 

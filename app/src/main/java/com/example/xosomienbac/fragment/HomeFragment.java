@@ -17,6 +17,8 @@ import com.example.xosomienbac.activity.MienNamActivity;
 import com.example.xosomienbac.activity.MienTrungActivity;
 import com.example.xosomienbac.activity.OnRegionClickListener;
 import com.example.xosomienbac.R;
+import com.example.xosomienbac.activity.SoiCauActivity;
+import com.example.xosomienbac.activity.ThongKeActivity;
 import com.example.xosomienbac.adapter.HomeAdapter;
 import com.example.xosomienbac.model.HomeItem;
 
@@ -29,6 +31,8 @@ public class HomeFragment extends Fragment {
     LinearLayout mienBac;
     LinearLayout mienTrung;
     LinearLayout mienNam;
+    LinearLayout thongKe;
+    LinearLayout soiCau;
 
     @Nullable
     @Override
@@ -59,6 +63,8 @@ public class HomeFragment extends Fragment {
 
         mienNam =
                 view.findViewById(R.id.layoutMienNam);
+        thongKe = view.findViewById(R.id.layoutThongKe);
+        soiCau = view.findViewById(R.id.layoutSoiCau);
 
         rvHomeGrid.setLayoutManager(
                 new GridLayoutManager(getContext(),3));
@@ -156,6 +162,18 @@ public class HomeFragment extends Fragment {
             Intent intent =
                     new Intent(getActivity(),
                             MienNamActivity.class);
+            startActivity(intent);
+        });
+        thongKe.setOnClickListener(v -> {
+            Intent intent =
+                    new Intent(getActivity(),
+                            ThongKeActivity.class);
+            startActivity(intent);
+        });
+        soiCau.setOnClickListener(v -> {
+            Intent intent =
+                    new Intent(getActivity(),
+                            SoiCauActivity.class);
             startActivity(intent);
         });
     }

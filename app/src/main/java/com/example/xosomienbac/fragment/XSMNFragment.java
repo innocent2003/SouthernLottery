@@ -1,5 +1,6 @@
 package com.example.xosomienbac.fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.xosomienbac.R;
+import com.example.xosomienbac.adapter.MultiProvinceAdapter;
 import com.example.xosomienbac.adapter.XSMBAdapter;
+import com.example.xosomienbac.crawler.OnCrawlResultListener;
+import com.example.xosomienbac.crawler.OnMultiCrawlResultListener;
+import com.example.xosomienbac.crawler.XSMBCrawler;
 import com.example.xosomienbac.model.PrizeRow;
+import com.example.xosomienbac.model.RowData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,15 +51,43 @@ public class XSMNFragment extends Fragment {
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext()));
 
-        List<PrizeRow> data = new ArrayList<>();
 
-//        data.add(new PrizeRow("G8",
-//                "60 | 78 | 19"));
-//
-//        data.add(new PrizeRow("G7",
-//                "620 | 088 | 860"));
+        loadData();
+    }
+    private void loadData() {
 
-        recyclerView.setAdapter(
-                new XSMBAdapter(data));
+        String url =
+                "https://az24.vn/xsmn-sxmn-ket-qua-xo-so-mien-nam.html";
+
+        XSMBCrawler.crawlMultiProvince(
+                url,
+                new OnMultiCrawlResultListener() {
+
+                    @Override
+                    public void onSuccess(
+                            List<RowData> data) {
+
+                        requireActivity()
+                                .runOnUiThread(() -> {
+
+                                    recyclerView.setAdapter(
+                                            new MultiProvinceAdapter(
+                                                    data
+                                            )
+                                    );
+                                });
+                    }
+
+                    @Override
+                    public void onError(
+                            Exception e) {
+
+                        Log.e(
+                                "XSMN",
+                                "Error",
+                                e
+                        );
+                    }
+                });
     }
 }

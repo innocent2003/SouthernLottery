@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.xosomienbac.R;
 import com.example.xosomienbac.adapter.XSMBAdapter;
+import com.example.xosomienbac.adapter.XSMTAdapter;
 import com.example.xosomienbac.crawler.OnCrawlResultListener;
 import com.example.xosomienbac.crawler.XSMBCrawler;
+import com.example.xosomienbac.crawler.XSMTCrawler;
 import com.example.xosomienbac.model.PrizeRow;
 
 import java.util.List;
@@ -31,7 +33,7 @@ public class DaNangFragment extends Fragment {
             @Nullable Bundle savedInstanceState) {
 
         return inflater.inflate(
-                R.layout.fragment_danang,
+                R.layout.fragment_xsmn,
                 container,
                 false);
     }
@@ -42,27 +44,18 @@ public class DaNangFragment extends Fragment {
             @Nullable Bundle savedInstanceState) {
 
         recyclerView =
-                view.findViewById(R.id.rvXSMN);
+                view.findViewById(R.id.rvXsmn);
 
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext()));
 
-//        List<PrizeRow> data = new ArrayList<>();
-//
-//        data.add(new PrizeRow("ĐB","47202"));
-//        data.add(new PrizeRow("G1","65673"));
-//        data.add(new PrizeRow("G2","20007 - 93437"));
-//        data.add(new PrizeRow("G3","15277 - 19055"));
-//        data.add(new PrizeRow("G4","2797 - 2795"));
-//
-//        recyclerView.setAdapter(
-//                new XSMBAdapter(data));
+
         loadData();
 
     }
     private void loadData() {
 
-        XSMBCrawler.crawl(
+        XSMTCrawler.crawl(
                 new OnCrawlResultListener() {
 
                     @Override
@@ -73,7 +66,7 @@ public class DaNangFragment extends Fragment {
                                 .runOnUiThread(() -> {
 
                                     recyclerView.setAdapter(
-                                            new XSMBAdapter(data)
+                                            new XSMTAdapter(data)
                                     );
 
                                 });
@@ -84,10 +77,9 @@ public class DaNangFragment extends Fragment {
                             Exception e) {
 
                         Log.e(
-                                "XSMB",
+                                "XSMT",
                                 "Crawl error",
-                                e
-                        );
+                                e);
                     }
                 });
     }

@@ -1,5 +1,6 @@
 package com.example.xosomienbac.fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.xosomienbac.R;
 import com.example.xosomienbac.adapter.XSMBAdapter;
+import com.example.xosomienbac.crawler.OnCrawlResultListener;
+import com.example.xosomienbac.crawler.XSMBCrawler;
 import com.example.xosomienbac.model.PrizeRow;
 
 import java.util.ArrayList;
@@ -44,18 +47,34 @@ public class XSMTFragment extends Fragment {
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext()));
 
-        List<PrizeRow> data = new ArrayList<>();
+        loadData();
+    }
+    private void loadData() {
 
-//        data.add(new PrizeRow("G8",
-//                "39 | 70 | 33"));
-//
-//        data.add(new PrizeRow("G7",
-//                "444 | 807 | 903"));
-//
-//        data.add(new PrizeRow("G6",
-//                "5027 | 8890 | 9413"));
+        String url =
+                "https://az24.vn/xsmb-sxmb-xo-so-mien-bac.html";
 
-        recyclerView.setAdapter(
-                new XSMBAdapter(data));
+        XSMBCrawler.crawl(
+                url,
+                new OnCrawlResultListener() {
+
+                    @Override
+                    public void onSuccess(
+                            List<PrizeRow> data) {
+
+                        requireActivity()
+                                .runOnUiThread(() -> {
+
+                                    recyclerView.setAdapter(
+                                            new XSMBAdapter(data)
+                                    );
+                                });
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Log.e("XSMB", "Error", e);
+                    }
+                });
     }
 }

@@ -31,6 +31,21 @@
             android:name=".activity.MienNamActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.ThongKeActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <!-- <activity android:name=".activity.ThongKeActivity" -->
+        <!-- android:exported="false" -->
+        <!-- android:windowSoftInputMode="adjustResize"/> -->
+        <activity
+            android:name=".activity.SoiCauActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.DoVeSoActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
