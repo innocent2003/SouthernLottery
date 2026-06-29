@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.xosomienbac.activity.DoVeSoActivity;
 import com.example.xosomienbac.activity.MienNamActivity;
 import com.example.xosomienbac.activity.MienTrungActivity;
 import com.example.xosomienbac.activity.OnRegionClickListener;
@@ -33,6 +34,7 @@ public class HomeFragment extends Fragment {
     LinearLayout mienNam;
     LinearLayout thongKe;
     LinearLayout soiCau;
+    LinearLayout doVeSo;
 
     @Nullable
     @Override
@@ -65,6 +67,7 @@ public class HomeFragment extends Fragment {
                 view.findViewById(R.id.layoutMienNam);
         thongKe = view.findViewById(R.id.layoutThongKe);
         soiCau = view.findViewById(R.id.layoutSoiCau);
+        doVeSo = view.findViewById(R.id.layoutDoVeSo);
 
         rvHomeGrid.setLayoutManager(
                 new GridLayoutManager(getContext(),3));
@@ -142,9 +145,13 @@ public class HomeFragment extends Fragment {
 
         OnRegionClickListener listener =
                 (OnRegionClickListener) getActivity();
+        mienBac.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), DoVeSoActivity.class);
+            startActivity(intent);
+        });
 
-        mienBac.setOnClickListener(v ->
-                listener.openMienBac());
+//        mienBac.setOnClickListener(v ->
+//                listener.openMienBac());
 
 //        mienTrung.setOnClickListener(v ->
 //                listener.openMienTrung());
@@ -174,6 +181,10 @@ public class HomeFragment extends Fragment {
             Intent intent =
                     new Intent(getActivity(),
                             SoiCauActivity.class);
+            startActivity(intent);
+        });
+        doVeSo.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), DoVeSoActivity.class);
             startActivity(intent);
         });
     }

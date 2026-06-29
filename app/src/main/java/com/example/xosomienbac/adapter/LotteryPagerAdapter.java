@@ -6,10 +6,13 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.xosomienbac.fragment.HomeFragment;
+import com.example.xosomienbac.fragment.LotteryFragment;
 import com.example.xosomienbac.fragment.XSMBFragment;
 import com.example.xosomienbac.fragment.XSMNFragment;
 import com.example.xosomienbac.fragment.XSMTFragment;
 
+import java.util.ArrayList;
+import java.util.List;
 public class LotteryPagerAdapter extends FragmentStateAdapter {
 
     public LotteryPagerAdapter(@NonNull FragmentActivity fa) {

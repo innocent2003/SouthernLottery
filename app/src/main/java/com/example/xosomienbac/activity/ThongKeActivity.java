@@ -12,6 +12,7 @@ import com.example.xosomienbac.R;
 
 public class ThongKeActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
