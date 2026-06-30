@@ -78,7 +78,7 @@ public class DoVeSoActivity extends AppCompatActivity {
                 });
     }
     private void initView() {
-        rvResult = findViewById(R.id.rvResult);
+//        rvResult = findViewById(R.id.rvResult);
 
         rvResult.setLayoutManager(new LinearLayoutManager(this));
 
